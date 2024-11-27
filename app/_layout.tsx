@@ -1,4 +1,5 @@
 import { useColorScheme } from "@/presentation/hooks/useColorScheme.web";
+import PermissionsCheckerProvider from "@/presentation/providers/PermissionsCheckerProvider";
 import {
   DarkTheme,
   DefaultTheme,
@@ -32,18 +33,21 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-      <Stack
-        screenOptions={{
-          headerShown: false,
-        }}
-      >
-        <Stack.Screen name="loading/index" options={{ animation: "none" }} />
-        <Stack.Screen name="map/index" options={{ animation: "fade" }} />
-        <Stack.Screen
-          name="permissions/index"
-          options={{ animation: "fade" }}
-        />
-      </Stack>
+      <PermissionsCheckerProvider>
+        <Stack
+          screenOptions={{
+            headerShown: false,
+          }}
+        >
+          <Stack.Screen name="loading/index" options={{ animation: "none" }} />
+          <Stack.Screen name="map/index" options={{ animation: "fade" }} />
+          <Stack.Screen
+            name="permissions/index"
+            options={{ animation: "fade" }}
+          />
+        </Stack>
+      </PermissionsCheckerProvider>
+
       {/* <StatusBar style="auto" backgroundColor="transparent" /> */}
     </ThemeProvider>
   );
