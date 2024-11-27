@@ -12,12 +12,17 @@
       "supportsTablet": true
     },
     "android": {
+      "config":{
+        "googleMaps":{
+          "apiKey":"AIzaSyDqdqGtBvh1ixSQbjsz2Al6C6UoE7Vi9M0"
+        }
+      },
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
       "package": "com.majomon.mapsapp"
-    },
+    }, 
     "web": {
       "bundler": "metro",
       "output": "static",
