@@ -2,7 +2,7 @@ import { LatLng } from "@/infraestructure/interfaces/lat-lng";
 import { useLocationStore } from "@/presentation/store/useLocationStore";
 import React, { useEffect, useRef, useState } from "react";
 import { StyleSheet, View, ViewProps } from "react-native";
-import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
+import MapView, { Polyline } from "react-native-maps";
 import { FAB } from "../shared/FAB";
 
 interface Props extends ViewProps {
@@ -17,8 +17,14 @@ export const CustmomMap = ({
 }: Props) => {
   const mapRef = useRef<MapView>(null);
   const [isFollowingUser, setIsFollowingUser] = useState(true);
-  const { watchLocation, clearWatchLocation, lastKnownLocation, getLocation } =
-    useLocationStore();
+  const [isShowingPolyline, setIsShowingPolyline] = useState(true);
+  const {
+    watchLocation,
+    clearWatchLocation,
+    lastKnownLocation,
+    getLocation,
+    userLocationList,
+  } = useLocationStore();
 
   useEffect(() => {
     watchLocation();
@@ -68,7 +74,22 @@ export const CustmomMap = ({
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         }}
+      >
+        {isShowingPolyline && (
+          <Polyline
+            coordinates={userLocationList}
+            strokeColor={"black"}
+            strokeWidth={5}
+          />
+        )}
+      </MapView>
+
+      <FAB
+        iconName={isFollowingUser ? "eye-outline" : "eye-off-outline"}
+        onPress={() => setIsShowingPolyline(!isShowingPolyline)}
+        style={{ bottom: 140, right: 20 }}
       />
+
       <FAB
         iconName={isFollowingUser ? "walk-outline" : "accessibility-outline"}
         onPress={() => setIsFollowingUser(!isFollowingUser)}
