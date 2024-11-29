@@ -16,7 +16,7 @@ export const getCurrentLocation = async (): Promise<LatLng> => {
   }
 };
 
-export const wathCurrentPosition = (
+export const watchCurrentPosition = (
   locationCallback: (location: LatLng) => void
 ) => {
   return Location.watchPositionAsync(
