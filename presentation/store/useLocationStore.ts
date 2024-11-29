@@ -43,6 +43,8 @@ export const useLocationStore = create<LocationState>()((set, get) => ({
       });
     });
 
+    console.log(get().userLocationList);
+
     set({ watchSubscriptionID: watchSubscription });
   },
 
