@@ -1,11 +1,17 @@
+import { CustmomMap } from "@/presentation/components/maps/CustomMap";
 import React from "react";
-import { StyleSheet, View } from "react-native";
-import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
+import { View } from "react-native";
 
 const MapsScreen = () => {
   return (
-    <View style={styles.container}>
-      <MapView
+    <View>
+      <CustmomMap
+        initialLocation={{
+          latitude: -34.688772,
+          longitude: -58.566762,
+        }}
+      />
+      {/*       <MapView
         style={styles.map}
         provider={PROVIDER_GOOGLE}
         initialRegion={{
@@ -14,37 +20,9 @@ const MapsScreen = () => {
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         }}
-      >
-        <Marker
-          coordinate={{
-            latitude: -34.688772,
-            longitude: -58.566762,
-          }}
-          title="Aquí estoy "
-          description="Rotonda San Justo"
-        />
-
-        <Marker
-          coordinate={{
-            latitude: -34.685368,
-            longitude: -58.556452,
-          }}
-          title="Shooping "
-          description="Shooping San Justo"
-        />
-      </MapView>
+      /> */}
     </View>
   );
 };
 
 export default MapsScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  map: {
-    width: "100%",
-    height: "100%",
-  },
-});
