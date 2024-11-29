@@ -3,6 +3,7 @@ import { useLocationStore } from "@/presentation/store/useLocationStore";
 import React, { useEffect, useRef } from "react";
 import { StyleSheet, View, ViewProps } from "react-native";
 import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
+import { FAB } from "../shared/FAB";
 
 interface Props extends ViewProps {
   initialLocation: LatLng;
@@ -52,6 +53,11 @@ export const CustmomMap = ({
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         }}
+      />
+      <FAB
+        iconName="airplane-outline"
+        style={{ bottom: 20, right: 20 }}
+        onPress={() => {}}
       />
     </View>
   );
