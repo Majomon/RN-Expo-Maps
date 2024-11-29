@@ -1,5 +1,6 @@
 import { LatLng } from "@/infraestructure/interfaces/lat-lng";
-import React from "react";
+import { useLocationStore } from "@/presentation/store/useLocationStore";
+import React, { useEffect } from "react";
 import { StyleSheet, View, ViewProps } from "react-native";
 import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 
@@ -13,6 +14,15 @@ export const CustmomMap = ({
   showUserLocation = true,
   ...rest
 }: Props) => {
+  const { watchLocation, clearWatchLocation } = useLocationStore();
+
+  useEffect(() => {
+    watchLocation();
+    return () => {
+      clearWatchLocation();
+    };
+  }, []);
+
   return (
     <View {...rest}>
       <MapView

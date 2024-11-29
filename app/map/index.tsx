@@ -1,24 +1,32 @@
 import { CustmomMap } from "@/presentation/components/maps/CustomMap";
-import React from "react";
-import { View } from "react-native";
+import { useLocationStore } from "@/presentation/store/useLocationStore";
+import React, { useEffect } from "react";
+import { ActivityIndicator, View } from "react-native";
 
 const MapsScreen = () => {
+  const { lastKnownLocation, getLocation } = useLocationStore();
+
+  useEffect(() => {
+    if (lastKnownLocation === null) {
+      getLocation();
+    }
+  }, []);
+
+  if (lastKnownLocation === null) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator />
+      </View>
+    );
+  }
+
   return (
     <View>
-      <CustmomMap
+      <CustmomMap initialLocation={lastKnownLocation} />
+      {/*       <CustmomMap
         initialLocation={{
           latitude: -34.688772,
           longitude: -58.566762,
-        }}
-      />
-      {/*       <MapView
-        style={styles.map}
-        provider={PROVIDER_GOOGLE}
-        initialRegion={{
-          latitude: -34.688772,
-          longitude: -58.566762,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
         }}
       /> */}
     </View>
